@@ -1,9 +1,7 @@
-var io = require('socket.io')({
-	transports: ['websocket'],
-});
-var shortId = require('shortid');
+
+var io = require('socket.io')(process.env.PORT || 52300);
+
 var clients = [];
-io.attach(3000);
 
 io.on('connection', function(socket){
 
@@ -15,7 +13,7 @@ io.on('connection', function(socket){
 		console.log("[INFO] Player: "+player.name+" connected!");
 		currentUser = {
 			name: player.name,
-			id: shortId.generate(),
+			id: "5",
 			position: player.position,
 			rotation: player.rotation
 		}
@@ -41,18 +39,18 @@ io.on('connection', function(socket){
 
 	});
 
-	//funcao apra atualizar a movimentacao do cliente (ROTACAO)
-	socket.on('ROTATE', function(data){
-		currentUser.position = data.rotation;
-		socket.broadcast.emit('UPDATE_ROTATE',currentUser); //envia para todos os clientes
-		console.log(currentUser.name+" Move to "+currentUser.position);
-	});
-
 	//funcao apra atualizar a movimentacao do cliente (POSICAO)
 	socket.on('MOVE', function(data){
 		currentUser.position = data.position;
 		socket.broadcast.emit('UPDATE_MOVE',currentUser); //envia para todos os clientes
 		console.log(currentUser.name+" Move to "+currentUser.position);
+	});
+
+	//funcao apra atualizar a movimentacao do cliente (ROTACAO)
+	socket.on('ROTATE', function(data){
+		currentUser.position = data.rotation;
+		socket.broadcast.emit('UPDATE_ROTATE',currentUser); //envia para todos os clientes
+		console.log(currentUser.name+" Move to "+currentUser.rotation);
 	});
 
 	socket.on('disconnect',function(){ //destruir players nos outros clientes
@@ -65,10 +63,7 @@ io.on('connection', function(socket){
 		}
 	});
 
-
 })
-
-console.log("Servidor rodando");
 
 /*
 var express = require('express');

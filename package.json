@@ -5,9 +5,8 @@
     "private": true,
     "main": "server.js",
     "dependencies": {
-        "express": "4.16.4",
-        "socket.io": "2.2.0",
-        "shortid": "2.2.14"
+        "nodemon": "^1.18.9",
+        "socket.io": "2.2.0"
     },
     "devDependencies": {},
     "scripts": {
