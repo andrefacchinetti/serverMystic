@@ -1,0 +1,19 @@
+{
+    "name": "mystic-culture",
+    "version": "0.0.1",
+    "description": "",
+    "private": true,
+    "main": "server.js",
+    "dependencies": {
+        "express": "4.16.4",
+        "socket.io": "2.2.0",
+        "shortid": "2.2.14"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no text specified\" && exit 1",
+        "start": "node server.js"
+    },
+    "author": "Facchinetti",
+    "license": "MIT"
+}
